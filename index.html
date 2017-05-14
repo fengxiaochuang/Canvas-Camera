@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>HTML5 GetUserMedia Demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 </head>
 <body>
-<input type="button" title="开启摄像头" value="开启摄像头" onclick="getMedia();" /><br />
-<video height="120px" autoplay="autoplay"></video><hr />
-<input type="button" title="拍照" value="拍照" onclick="getPhoto();" /><br />
-<canvas id="canvas1" height="120px" ></canvas><hr />
-<input type="button" title="视频" value="视频" onclick="getVedio();" /><br />
+<input type="button" title="开启摄像头" value="开启摄像头" onclick="getMedia();"/><br/>
+<video height="120px" autoplay="autoplay"></video>
+<hr/>
+<input type="button" title="拍照" value="拍照" onclick="getPhoto();"/><br/>
+<canvas id="canvas1" height="120px"></canvas>
+<hr/>
+<input type="button" title="视频" value="视频" onclick="getVedio();"/><br/>
 <canvas id="canvas2" height="120px"></canvas>
 
 <script type="text/javascript">
@@ -45,7 +47,7 @@
                         'sourceId': exArray[1] //0为前置摄像头，1为后置
                     }]
                 },
-                'audio':true
+                'audio': true
             }, successFunc, errorFunc);    //success是获取成功的回调函数
         }
         else {
@@ -74,14 +76,18 @@
         }
     }
     function errorFunc(e) {
-        alert('Error！'+e);
+        alert('Error！' + e);
     }
 
 
     // 将视频帧绘制到Canvas对象上,Canvas每60ms切换帧，形成肉眼视频效果
-    function drawVideoAtCanvas(video,context) {
+    function drawVideoAtCanvas(video, context) {
+        var img = new Image();
+        img.src = "http://images.cnblogs.com/cnblogs_com/vajoy/558869/o_avatar.jpg";
+        context.globalAlpha = 0.5;
+        context.drawImage(img, 10, 60);
         window.setInterval(function () {
-            context.drawImage(video, 0, 0,90,120);
+            context.drawImage(video, 0, 0, 90, 120);
         }, 60);
     }
 
@@ -104,7 +110,7 @@
 
     //拍照
     function getPhoto() {
-        context1.drawImage(video, 0, 0,90,120); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
+        context1.drawImage(video, 0, 0, 90, 120); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
     }
 
     //视频
